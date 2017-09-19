@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public class ReduceForWords extends Reducer<IntWritable, Text, IntWritable,Text> {
-
+    @Override
     public void reduce(IntWritable key, Iterable<Text> values,  Reducer<IntWritable, Text, IntWritable,Text>.Context con) throws IOException, InterruptedException {
         IntWritable max_length = new IntWritable(0);
         Text line = new Text("");

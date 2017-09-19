@@ -10,6 +10,7 @@ import java.io.IOException;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Text;
 
 public class MapForWords extends Mapper<LongWritable, Text, IntWritable, Text> {
+    @Override
     public void map(LongWritable key, Text value, Mapper<LongWritable, Text, IntWritable, Text>.Context con) throws IOException, InterruptedException
     {
         String line = value.toString();
