@@ -6,6 +6,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Text;
 
