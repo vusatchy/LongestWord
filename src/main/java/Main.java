@@ -1,4 +1,5 @@
 
+import combiner.CombinerForWords;
 import mapper.MapForWords;
 import org.apache.hadoop.util.GenericOptionsParser;
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class Main {
             Job j = new Job(c, "LongestWord");
             j.setJarByClass(Main.class);
             j.setMapperClass(MapForWords.class);
+            j.setCombinerClass(CombinerForWords.class);
             j.setReducerClass(ReduceForWords.class);
             j.setOutputKeyClass(IntWritable.class);
             j.setOutputValueClass(Text.class);

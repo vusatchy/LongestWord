@@ -16,7 +16,7 @@ public class MapForWords extends Mapper<LongWritable, Text, IntWritable, Text> {
     public void map(LongWritable key, Text value, Mapper<LongWritable, Text, IntWritable, Text>.Context con) throws IOException, InterruptedException
     {
         String line = value.toString();
-        String[] words = line.split(" ");
+        String[] words = line.split("[-\\s,.()!।@?=¿'’*&%း▀   _+-;\"“”>|€$^]+");
         for (String word : words) {
             IntWritable outputKey = new IntWritable(1);
             Text outputValue = new Text(word.trim());

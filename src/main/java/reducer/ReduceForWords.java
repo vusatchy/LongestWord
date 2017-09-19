@@ -31,7 +31,7 @@ public class ReduceForWords extends Reducer<IntWritable, Text, IntWritable,Text>
                 few.add(txt.toString());
             }
         }
-        String result = few.stream().collect(Collectors.joining(","));
+        String result = few.stream().collect(Collectors.joining(" "));
         con.write(max_length,new Text(result));
     }
 }
