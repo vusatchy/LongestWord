@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
             }
             for (String value :few
                  ) {
-                con.write(new IntWritable(value.length()),new Text(value));
+                con.write(new IntWritable(value.length()*-1),new Text(value));
             }
 
     }

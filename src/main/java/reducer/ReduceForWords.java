@@ -13,33 +13,28 @@ public class ReduceForWords extends Reducer<IntWritable, Text, IntWritable,Text>
     private String maxWord;
     private IntWritable max_length;
     private Set<String> few;
+    private int single=1;
     @Override
     protected void setup(Context context) throws java.io.IOException, InterruptedException {
-        maxWord = new String();
-        max_length=new IntWritable(0);
+        maxWord = null;
+        max_length=null;
         few=new HashSet<>();
     }
     public void reduce(IntWritable key, Iterable<Text> values,  Reducer<IntWritable, Text, IntWritable,Text>.Context con) throws IOException, InterruptedException {
 
-        Iterator<Text> itr = values.iterator();
-        Text txt;
-        if(key.get()>=max_length.get()) {
-            while (itr.hasNext()) {
-                txt = new Text(itr.next());
-                if (txt.getLength() > max_length.get()) {
-                    max_length.set(key.get());
-                    maxWord = txt.toString();
-                    few.clear();
-
-                }
-                if (txt.getLength() == max_length.get()) {
-                    few.add(txt.toString());
-                }
+        if(maxWord==null){
+            maxWord=new String();
+            String res;
+            for (Text value:values){
+                Text temp=new Text(value);
+                few.add(temp.toString());
             }
+            if(few.size()>single) {
+                res = few.stream().collect(Collectors.joining(" , "));
+            }
+            else res=maxWord;
+            con.write(new IntWritable(key.get()*-1),new Text(res));
         }
-    }
-    protected void cleanup(Context context) throws IOException, InterruptedException {
-        String res=few.stream().collect(Collectors.joining(" , "));
-        context.write(new IntWritable(maxWord.length()),new Text(res));
+
     }
 }
